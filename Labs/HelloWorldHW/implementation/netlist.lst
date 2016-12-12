@@ -1,0 +1,16 @@
+E:\427\HelloWorldHW\implementation\system.ngc 1473269458
+E:/427/HelloWorldHW/implementation/push_buttons_5bits_wrapper.ngc 1473269402
+E:/427/HelloWorldHW/implementation/dip_switches_8bits_wrapper.ngc 1473269420
+E:/427/HelloWorldHW/implementation/rs232_uart_1_wrapper.ngc 1473269394
+E:/427/HelloWorldHW/implementation/proc_sys_reset_0_wrapper.ngc 1473269274
+E:/427/HelloWorldHW/implementation/clock_generator_0_wrapper.ngc 1473269440
+E:/427/HelloWorldHW/implementation/microblaze_0_ilmb_wrapper.ngc 1473269426
+E:/427/HelloWorldHW/implementation/microblaze_0_dlmb_wrapper.ngc 1473269430
+E:/427/HelloWorldHW/implementation/axi4lite_0_wrapper.ngc 1473269442
+E:/427/HelloWorldHW/implementation/microblaze_0_wrapper.ngc 1473269436
+E:/427/HelloWorldHW/implementation/microblaze_0_i_bram_ctrl_wrapper.ngc 1473269284
+E:/427/HelloWorldHW/implementation/microblaze_0_d_bram_ctrl_wrapper.ngc 1473269296
+E:/427/HelloWorldHW/implementation/debug_module_wrapper.ngc 1473269368
+E:/427/HelloWorldHW/implementation/leds_8bits_wrapper.ngc 1473269412
+E:/427/HelloWorldHW/implementation/microblaze_0_bram_block_wrapper.ngc 1473269302
+OK

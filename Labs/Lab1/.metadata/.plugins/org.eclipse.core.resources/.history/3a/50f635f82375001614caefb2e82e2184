@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include "platform.h"
+
+void print(char *str);
+
+int main()
+{
+    init_platform();
+
+    print("1,1,2,3,5,8,13,21,34,55,89,144\n\r");
+
+    cleanup_platform();
+
+    return 0;
+}

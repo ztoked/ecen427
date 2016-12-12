@@ -1,0 +1,56 @@
+!SESSION 2016-12-06 18:55:48.704 -----------------------------------------------
+eclipse.buildId=Release 13.4 Build SDK_O.87xd
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-12-06 18:57:02.386
+!MESSAGE Indexed 'hello_world_bsp_0' (61 sources, 50 headers) in 1.23 sec: 1,921 declarations; 9,160 references; 18 unresolved inclusions; 0 syntax errors; 85 unresolved names (0.76%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-12-06 18:57:02.573
+!MESSAGE Indexed 'hello_world_0' (2 sources, 31 headers) in 0.19 sec: 871 declarations; 826 references; 3 unresolved inclusions; 0 syntax errors; 1 unresolved names (0.06%)
+!SESSION 2016-12-07 11:29:39.662 -----------------------------------------------
+eclipse.buildId=Release 13.4 Build SDK_O.87xd
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui 4 4 2016-12-07 11:30:01.948
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2016-12-07 11:30:03.538
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2016-12-07 11:30:03.538
+!MESSAGE Unable to restore perspective: Workspace - C/C++.
+!SUBENTRY 2 org.eclipse.ui 0 0 2016-12-07 11:30:03.538
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2016-12-07 11:30:03.538
+!MESSAGE 
+!SUBENTRY 2 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-12-07 11:30:03.538
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.ui 4 0 2016-12-07 11:30:03.539
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 unknown 0 0 2016-12-07 11:30:03.539
+!MESSAGE OK

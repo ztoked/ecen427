@@ -1,0 +1,13 @@
+
+static unsigned int * framePointer_g;
+
+void screenState_setFramePointer(unsigned int * framePointer){
+
+	framePointer_g = framePointer;
+
+}
+
+unsigned int * screenState_getFramePointer(){
+	return framePointer_g;
+
+}

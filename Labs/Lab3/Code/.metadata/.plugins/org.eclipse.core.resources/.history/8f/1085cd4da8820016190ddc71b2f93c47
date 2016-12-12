@@ -1,0 +1,10 @@
+//This file has functions for drawing objects in the game
+
+#include <stdint.h>
+
+typedef enum objectId {
+	alien = 0,
+	saucer = 1
+};
+
+void aliens_drawObject(uint16_t x, uint16_t y, objectId object);

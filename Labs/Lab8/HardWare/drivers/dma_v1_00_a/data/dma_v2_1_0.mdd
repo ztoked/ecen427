@@ -1,0 +1,15 @@
+##############################################################################
+## Filename:          E:\427\Lab8\HardWare/drivers/dma_v1_00_a/data/dma_v2_1_0.mdd
+## Description:       Microprocessor Driver Definition
+## Date:              Mon Dec 05 15:24:10 2016 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+OPTION psf_version = 2.1.0;
+
+BEGIN DRIVER dma
+
+  OPTION supported_peripherals = (dma);
+  OPTION depends = (common_v1_00_a);
+  OPTION copyfiles = all;
+
+END DRIVER

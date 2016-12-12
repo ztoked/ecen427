@@ -1,0 +1,7 @@
+#include "thePITS.h"
+#include "xparameters.h"
+#include "xil_io.h"
+
+void thePITS_init(){
+	XPAR_PIT_0_BASEADDR
+}

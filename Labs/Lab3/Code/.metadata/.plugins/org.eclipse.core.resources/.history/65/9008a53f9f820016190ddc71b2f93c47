@@ -1,0 +1,23 @@
+
+static unsigned int * framePointer_g;
+
+void screenState_setFramePointer(unsigned int * framePointer){
+
+	framePointer_g = framePointer;
+
+}
+
+unsigned int * screenState_getFramePointer(){
+	return framePointer_g;
+}
+
+void screenState_clearScreen(){
+	for (row = y; row < 640 + y; row++) {
+		for (col = x; col < 480 + x; col++) {
+			screenState_getFramePointer()[row * 640 + col] = 0x000000000; // Black
+		}
+	}
+
+}
+
+

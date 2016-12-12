@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdint.h>
+#include "dma.h"
+#include "platform.h"
+#include "xparameters.h"
+
+void print(char *str);
+
+static char readData[] = "abc";
+int main()
+{
+	uint32_t source_word = 0xDEADBEEF;
+	uint32_t destination_word = 0x0;
+
+    init_platform();
+
+    print("Hello World\n\r");
+    cleanup_platform();
+    printf("Printing value before DMA transfer.\n\r");
+    xil_printf("%x\r\n", testData);
+    int i = 0;
+
+    	readData[0] = 'a';
+
+
+    DMA_MasterRecvWord(XPAR_DMA_0_BASEADDR, (Xuint32) &source_word);
+    DMA_MasterSendWord(XPAR_DMA_0_BASEADDR, (Xuint32) &destination_word);
+
+    printf("Printing value after DMA transfer.\n\r");
+    xil_printf("%x\r\n", destination_word);
+
+//    cleanup_platform();
+
+    return 0;
+}

@@ -1,0 +1,14 @@
+/*
+ * sounds.h
+ *
+ *  Created on: Oct 17, 2016
+ *      Author: superman
+ */
+#include <stdint.h>
+#ifndef SOUNDS_H_
+#define SOUNDS_H_
+
+void sounds_init();
+void sounds_sendSound(uint32_t samples, uint8_t soundArray[]);
+
+#endif /* SOUNDS_H_ */

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;hello_world_0/src/scoreBoardBitmaps.c&apos; to &apos;scoreBoard.c&apos;" description="Rename resource &apos;scoreBoardBitmaps.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/scoreBoardBitmaps.c" name="scoreBoard.c" stamp="1475002586272" updateReferences="true"/>
+</session>

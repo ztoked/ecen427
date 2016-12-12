@@ -1,0 +1,33 @@
+
+**** Build of configuration Debug for project RealTimeClock ****
+
+make all 
+Building file: ../src/main.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../RealTimeClock_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/main.d" -MT"src/main.d" -o"src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+' '
+Building target: RealTimeClock.elf
+Invoking: MicroBlaze gcc linker
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../RealTimeClock_bsp_0/microblaze_0/lib -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -o"RealTimeClock.elf"  ./src/main.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: RealTimeClock.elf
+' '
+Invoking: MicroBlaze Print Size
+mb-size RealTimeClock.elf  |tee "RealTimeClock.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+   8790	    396	   2146	  11332	   2c44	RealTimeClock.elf
+Finished building: RealTimeClock.elf.size
+' '
+Invoking: Xilinx ELF Check
+elfcheck RealTimeClock.elf -hw ../../EDK_hw_platform/system.xml -pe microblaze_0  |tee "RealTimeClock.elf.elfcheck"
+elfcheck
+Xilinx EDK 13.4 Build EDK_O.87xd
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+
+Command Line: elfcheck -hw ../../EDK_hw_platform/system.xml -pe microblaze_0
+RealTimeClock.elf 
+
+ELF file	: RealTimeClock.elf
+elfcheck passed.
+Finished building: RealTimeClock.elf.elfcheck
+' '

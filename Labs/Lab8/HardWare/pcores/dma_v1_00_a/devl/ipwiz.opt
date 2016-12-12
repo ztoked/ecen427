@@ -1,0 +1,9 @@
+-batch 
+-create dma 
+-ver 1.00.a 
+-dir "E:\427\Lab8\HardWare" 
+-lang vhdl 
+-bus axi4lite ms 
+-reg 4 
+-xps 
+-driver 

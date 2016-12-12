@@ -1,0 +1,18 @@
+F:\427\Lab2\EDK\implementation\system.ngc 1473715020
+F:/427/Lab2/EDK/implementation/push_buttons_5bits_wrapper.ngc 1473714938
+F:/427/Lab2/EDK/implementation/dip_switches_8bits_wrapper.ngc 1473714966
+F:/427/Lab2/EDK/implementation/rs232_uart_1_wrapper.ngc 1473714924
+F:/427/Lab2/EDK/implementation/proc_sys_reset_0_wrapper.ngc 1473714772
+F:/427/Lab2/EDK/implementation/clock_generator_0_wrapper.ngc 1473714998
+F:/427/Lab2/EDK/implementation/microblaze_0_ilmb_wrapper.ngc 1473714978
+F:/427/Lab2/EDK/implementation/microblaze_0_dlmb_wrapper.ngc 1473714982
+F:/427/Lab2/EDK/implementation/axi4lite_0_wrapper.ngc 1473715002
+F:/427/Lab2/EDK/implementation/microblaze_0_wrapper.ngc 1473714994
+F:/427/Lab2/EDK/implementation/microblaze_0_intc_wrapper.ngc 1473714786
+F:/427/Lab2/EDK/implementation/microblaze_0_i_bram_ctrl_wrapper.ngc 1473714798
+F:/427/Lab2/EDK/implementation/microblaze_0_d_bram_ctrl_wrapper.ngc 1473714810
+F:/427/Lab2/EDK/implementation/debug_module_wrapper.ngc 1473714892
+F:/427/Lab2/EDK/implementation/leds_8bits_wrapper.ngc 1473714952
+F:/427/Lab2/EDK/implementation/fit_timer_0_wrapper.ngc 1473714974
+F:/427/Lab2/EDK/implementation/microblaze_0_bram_block_wrapper.ngc 1473714818
+OK

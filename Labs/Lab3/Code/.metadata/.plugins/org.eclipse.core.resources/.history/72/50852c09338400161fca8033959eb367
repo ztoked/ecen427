@@ -1,0 +1,45 @@
+
+//This file is for functions for clearing the screen and storing the state of the screen
+
+#include "screenState.h"
+
+static uint32_t screenState_swarmX = 0;
+static uint32_t screenState_swarmY = 0;
+static unsigned int * framePointer_g;
+
+void screenState_setFramePointer(unsigned int * framePointer){
+
+	framePointer_g = framePointer;
+
+}
+
+unsigned int * screenState_getFramePointer(){
+	return framePointer_g;
+}
+
+void screenState_clearScreen(){
+	uint16_t row, col;
+	for (row = 0; row < 480; row++) {
+		for (col = 0; col < 640; col++) {
+			screenState_getFramePointer()[row * 640 + col] = 0x000000000; // Black
+		}
+	}
+}
+
+void screenState_setSwarmX(uint32_t swarmX){
+	screenState_swarmX = swarmX;
+}
+
+uint32_t screenState_getSwarmX(){
+	return screenState_swarmX;
+}
+
+void screenState_setSwarmY(uint32_t swarmY){
+	screenState_swarmY = swarmY;
+}
+
+uint32_t screenState_getSwarmY(){
+	return screenState_swarmY;
+}
+
+

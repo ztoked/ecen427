@@ -1,0 +1,24 @@
+!SESSION 2016-11-15 13:51:58.916 -----------------------------------------------
+eclipse.buildId=Release 13.4 Build SDK_O.87xd
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-11-15 13:52:47.512
+!MESSAGE Indexed 'hello_world_bsp_0' (0 sources, 8 headers) in 0.09 sec: 0 declarations; 0 references; 8 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-11-15 13:52:47.921
+!MESSAGE Indexed 'hello_world_0' (2 sources, 26 headers) in 0.40 sec: 777 declarations; 787 references; 5 unresolved inclusions; 0 syntax errors; 1 unresolved names (0.06%)
+!SESSION 2016-11-28 13:06:45.739 -----------------------------------------------
+eclipse.buildId=2014.2
+java.version=1.7.0_40
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-11-28 13:07:33.180
+!MESSAGE Indexed 'hello_world_0' (20 sources, 58 headers) in 1.53 sec: 2,604 declarations; 5,506 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-11-28 13:07:35.115
+!MESSAGE Indexed 'hello_world_bsp_0' (61 sources, 104 headers) in 1.79 sec: 2,826 declarations; 10,265 references; 36 unresolved inclusions; 12 syntax errors; 81 unresolved names (0.61%)

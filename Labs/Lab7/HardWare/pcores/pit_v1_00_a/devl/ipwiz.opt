@@ -1,0 +1,9 @@
+-batch 
+-create pit 
+-ver 1.00.a 
+-dir "C:\git\ECEN427\lab5\SpaceInvadersHW" 
+-lang vhdl 
+-bus axi4lite s 
+-reg 3 
+-xps 
+-driver 

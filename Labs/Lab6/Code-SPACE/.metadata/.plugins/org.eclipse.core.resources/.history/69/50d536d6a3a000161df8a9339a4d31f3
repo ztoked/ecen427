@@ -1,0 +1,15 @@
+#include "thePITS.h"
+#include "xparameters.h"
+#include "xil_io.h"
+
+#define ONCE_SECOND 100000000
+
+#define COUNT_UP_TO_REGISTER XPAR_PIT_0_BASEADDR
+#define CONFIG_REGISTER XPAR_PIT_0_BASEADDR + 4
+
+
+void thePITS_init(){
+	Xil_Out32(COUNT_UP_TO_REGISTER, ONCE_SECOND / 50);
+	Xil_Out32(CONFIG_REGISTER, 7);
+
+}

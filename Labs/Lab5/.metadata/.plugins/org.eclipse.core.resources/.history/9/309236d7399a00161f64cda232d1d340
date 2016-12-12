@@ -1,0 +1,762 @@
+
+//This file is for functions for clearing the screen and storing the state of the screen
+
+#include "screenState.h"
+#include "aliens.h"
+#include <stdlib.h>
+#include "scoreBoard.h"
+#include <stdio.h>
+
+#define TANK_Y 200 //Start pos for tank y
+#define TANK_START_POS 160//Start pos for tank x
+#define BUNKER_HEIGHT 150//Height of bunker
+#define BUNKER_SPACE 75//Size of bunker x
+#define BUNKER_OFFSET 30//Space from left edge to left most bunker edge
+#define BULLET_OFF_SCREEN 0//Coordinate of bullet when off screen
+#define BULLET_OFFSET 55//Distance from bullet to top of screen
+#define GROUND_Y 450//Y location of ground
+#define GROUND_START_X 50//X location starting of ground
+#define GROUND_STOP_X 640 - 50//Final x position of ground
+#define ALIEN_BULLET_STOP 215//How far down y the alien bullets can go
+#define SWARM_TICKS_TO_MOVE 5//How many ticks before swarm moves
+#define SAUCER_MOVING_RIGHT 1//Saucer is moving right
+#define SAUCER_MOVING_LEFT 2//Moving left
+#define SAUCER_HEIGHT 20//Height of saucer
+#define SAUCER_WIDTH 16//Width of saucer
+#define SWITCH_DIE_TYPE 5//Ticks before switching the tank blowing up bitmap
+#define DONE_DYING 5//Ticks before the tank destruction animation is over
+#define SAUCER_SCORE_TIME 25//How much the saucer is worth factor
+#define UPDATE_BULLET_MAX_COUNT 2//Ticks between bullet updates
+#define NUM_ALIENS 55//Number of aliens
+#define SCREEN_WIDTH 640//Width of screen in pixels
+#define UNWRITEBLE_CHUNK 9 //Bunker chunk that cannot be writtten to
+#define REPLACEMENT_CHUNK 12//Where to write the unwritable chunk instead
+#define NUM_BUNKERS 4 //Number of bunkers
+#define SEGMENT_DIMENSION 6//Size of a bunker segment
+#define NOT_ERRODED_STATE 4 //State where segment is not eroded
+#define LITTLE_BIT_ERRODED_STATE 3 //State where segment is slightly eroded
+#define VERY_ERRODED_STATE 2 //State where segment is veryeroded
+#define MOST_ERRODED_STATE 1 //State where segment is most eroded
+
+#define SHOOT_BUTTON_MASK 0x10//Mask for inc button
+#define RIGHT_BUTTON_BIT 0x02//Value of the seconds bit
+#define LEFT_BUTTON_BIT 0x08//Value of the hours bit
+
+#define BULLET_LOOKAHEAD 8//How far a bullet looks ahead for a colision
+#define BUNKER_HEIGHT_OFFSET 18//Distance from top of bunker to bullet point
+#define BUNKER_INDEX_MAX 3 //Highest legal bunker index
+#define MAX_VALID_LOCAL_X 24 //Max valid value for a localX of a bunker
+#define SECOND_EMPTY_CHUNK 10 //Index of the second chunk of a bunker that is not erodable
+#define PARTLY_FULL_CHUNK 11//Index of bunker segment that is half green
+#define SAUCER_OFFSET 16 //Closets bullets get from saucer origin
+#define BULLET_SAUCER_HIT_OFFSET 7 //Offset between a bullet hit and the saucer origin
+#define PIXEL_TO_CHUNK 2 //To go from a chunk coordinate to a pixel coordinate
+#define TANK_LEFT_OFFSET 15//From center of tank to center of bullet x
+#define TANK_RIGHT_OFFSET 8//From center of tank to center of bullet x right side offset
+#define NUMBER_OF_BULLETS 5//Number of possible bullets in game
+#define BULET_X 0//To access x value of bullet
+#define BULLET_Y 1//To acces y value of bullet
+#define BULLET_WIDTH_OFFSET_VALUE 3//Width of a bullet
+
+#define BULLET_ALIEN_OFFSET_START 9 //How far over alien bullets start in y direction
+#define FIRST_SECOND_ROW 11//Index of first alien on second row
+#define FIRST_THIRD_ROW 22//Index of first alien on third row
+#define FIRST_FOURTH_ROW 33//Index of first alien on fourth row
+#define FIRST_FIFTH_ROW 44//Index of first alien on fifth row
+#define LAST_ALIEN_ON_ROW 10 //Index of the last alien on a row
+
+#define MAX_VALID_LOCAL_X 24 //For bunker localX values
+#define SWARM_HEIGHT 55 //Height of swarm in chunks
+#define ALIEN_WIDTH_IN_SWARM 16 //Distance between aliens in a swarm x
+#define ALIEN_HEIGHT_IN_SWARM 11 //Distance between aliens in a swarm y
+#define SWARM_MAX_ROW_INDEX 4//Bottom row of swarm
+#define SAUCER_MIN_SCORE 50//Min score for hitting saucer
+#define SAUCER_SCORE_RANGE 300//How much saucer score can vary
+#define ALIEN_FIRE_FREQUENCY 200//How often aliens fire
+#define SAUCER_SHOW_UP_FREQUENCY 100 //Seed for how often the saucer showsup
+
+#define SCREEN_WIDHT_CHUNK 320 //Width of screen in chunks
+#define SCREEN_HEIGHT_PIXEL 480 //Height of screen in pixels
+#define SCREEN_WIDTH_PIXEL 640 //Width of screen in pixels
+#define ALIEN_RIGHT_SIDE_HIT 176 //When aliens hit right side of screen x
+#define SEGMENTS_PER_BUNKER 10//Segments in a single bunker
+
+#define SQUIGLY_BULLET 2//To reference squigly bullet
+#define CROSS_BULLET 1//To reference the cross bullet
+#define JAGGED_BULLET 0//To reference the jagged bullet
+#define TANK_BULLET 3//Tank bullet type
+#define IS_EVEN 2//To check if a number is even or odd
+
+#define TANK_BULLET_INDEX 0//Index of tank bullet
+#define FIRST_ALIEN_BULLET 1//First alien bullet
+#define SECOUND_ALIEN_BULLET 2//Second alien bullet
+#define THIRD_ALIEN_BULLET 3//Third alien bullet
+#define BULLET_MOVEMENT 3//Chunks per movement of bullet
+#define ALIEN_EDGE 144 //How far over the aliens can go initially
+#define ALIEN_MOVE_DOWN_DISTANCE 5 //How far down the aliens move in chunks
+
+#define SWARM_START_X 72//Starting point for swarm
+#define SWARM_START_Y 20//Starting point for swarm
+#define TANK_EDGE_RIGHT_CHUNKS 305 //Edge of tank movement on right in chunks
+#define NO_MORE_ALIENS_YAY -1 //Return value from getLowestAlienRight() when all are dead
+
+#define POINTS_FOR_BOTTOM_ALIENS 10 //Points for killing bottom aliens
+#define POINTS_FOR_MIDDLE_ALIENS 20 //For killing middle aliens
+#define POINTS_FOR_TOP_ALIENS 40 //For killing top aliens
+#define TANK_BULLET_START_Y 9 //Chunk height of tank bullet above tank origin
+#define TANK_WIDTH 20 //Width of tank
+#define BULET_X 0//To access x value of bullet
+#define MISSLE_MOVEMENT_PER_TICK 3 //Movement of missle distance
+
+#define BULLET_X 0//To access x value of bullet
+#define BULLET_Y 1//To acces y value of bullet
+#define STARTING_LIVES 2 //Lives to start with
+
+static uint8_t saucerPrintTime = 0;//How long the score shows when the saucer is destroyed
+static int32_t screenState_swarmX = 0;//X location of swarm
+static int32_t screenState_swarmY = 0;//Y location of swarm
+static int8_t screenState_swarmArray[SWARM_HEIGHT];//Array representing alien states (alive or dead)
+static int8_t goneDown = 0;//Wither the aliens have already gone down on the edge
+static int32_t tankPos = TANK_START_POS;//X position of tank
+static int32_t bullets[NUMBER_OF_BULLETS][IS_EVEN];//Stores bullet location
+static int8_t bunkers[NUM_BUNKERS][SEGMENTS_PER_BUNKER];//Stores erasion states for each bunker
+static unsigned int * framePointer_g;//To write to the screen
+static int8_t onEdge;//True if the swarm is on the edge of the screen
+static int8_t saucerMoving = 0;//Keeps track of wither the saucer is moving
+static int16_t saucerPos = 0;//X position of saucer
+static int16_t saucerOldPos = 0;//Prev X pos of saucer
+static int8_t tankDying = 0;//If the tank is doing it's death animation
+static int8_t numLives = STARTING_LIVES;//Lives user has left
+static uint32_t score = 0;//Current score
+static uint8_t explosionCountDown = 0;//Alien explosion count down
+static int32_t deadAlienX;//Explosion X
+static int32_t deadAlienY;//Explosion Y
+static uint32_t saucer_score_x;//Saucer score for killing x location
+static uint32_t saucer_score_y;//Saucer kill score y location
+static uint8_t updateBulletCount = 0;//Time left until update bullets
+int8_t bulletTypes[NUMBER_OF_BULLETS ];//Keeps track of the type of each bullet
+
+
+
+//Called when the game is over
+static void gameOver() {
+	scoreBoard_gameOver();//Print GAME OVER
+	while(1);//Don't keep executing
+}
+
+//Draws the ground
+static void drawGround(){
+	int32_t row = GROUND_Y;//Set Y location
+	int32_t col = GROUND_START_X;//Set x location
+	for( ; col < GROUND_STOP_X; col++){//For each pixel of ground
+		screenState_getFramePointer()[(row) * SCREEN_WIDTH + (col)] = GREEN;//Draw each pixel individually
+	}
+}
+
+//Return index of lowest right alien still alive
+static int32_t getLowestAlienRight(){
+	int32_t i = 0;//Helper variable
+	for(i = NUM_ALIENS - 1; i >= 0; --i){//For each alien
+		if(screenState_swarmArray[i]){//If we hit a live one, return
+			return i;//Return the alien's index
+		}
+	}
+	return i;
+}
+
+//Damages given chunk
+static void erodeChunk(int8_t chunk, int8_t state, int8_t bunker) {
+	int32_t chunkX = (bunker * BUNKER_SPACE) + BUNKER_OFFSET + (SEGMENT_DIMENSION  * (chunk % NUM_BUNKERS ));//Calculate where the chunk is
+	if(chunk == UNWRITEBLE_CHUNK ) {//We can't damage this chunk
+		chunkX += REPLACEMENT_CHUNK ;//Set it to another chunk
+	}
+	int32_t chunkY = BUNKER_HEIGHT + (SEGMENT_DIMENSION  * (chunk / NUM_BUNKERS ));//Calculate chunk's y location
+	switch (state) {//Switch on erosion state
+	case NOT_ERRODED_STATE :
+		aliens_drawObject(chunkX, chunkY, chunkX, chunkY, bunker_damage0, BLACK, 0);//Draw correct damage bitmap
+		break;
+	case LITTLE_BIT_ERRODED_STATE :
+		aliens_drawObject(chunkX, chunkY,chunkX, chunkY, bunker_damage1, BLACK, 0);//Draw correct damage bitmap
+		break;
+	case VERY_ERRODED_STATE :
+		aliens_drawObject(chunkX, chunkY, chunkX, chunkY,bunker_damage2, BLACK, 0);//Draw correct damage bitmap
+		break;
+	case MOST_ERRODED_STATE :
+		aliens_drawObject(chunkX, chunkY,chunkX, chunkY, bunker_damage3, BLACK, 0);//Draw correct damage bitmap
+		break;
+	default:
+		break;
+	}
+}
+
+//Is the alien hitting the bunker?
+static int8_t isAlienHittingBunker(int32_t x, int32_t y) {
+	y = y + BULLET_LOOKAHEAD ;//Look ahead buffer
+	if(y <= BUNKER_HEIGHT + BUNKER_HEIGHT_OFFSET &&  y >=  BUNKER_HEIGHT){//If touching a bunker
+		int32_t bunkerNum = (x - BUNKER_OFFSET) / BUNKER_SPACE;//Figure out which bunker
+
+		if(bunkerNum > BUNKER_INDEX_MAX  || bunkerNum < 0){//If invalid bunker then we are not hitting one
+			return 0;//Returns false
+		}
+
+		uint32_t localX = x - ((bunkerNum * BUNKER_SPACE) + BUNKER_OFFSET);//LocalX is segment location relative to edge of bunker x
+		uint32_t localY = y - BUNKER_HEIGHT;//LocalY is segment location relative to edge of bunker y
+
+		if(localX  < MAX_VALID_LOCAL_X ) {//If localX is valid
+			int8_t column = localX / SEGMENT_DIMENSION ;//Calculate column
+			int8_t row = localY / SEGMENT_DIMENSION ;//Calculate row
+			if(row > BUNKER_INDEX_MAX ){
+				return 0;
+			}
+			int8_t segment = row * NUM_BUNKERS  + column;//Calculate segment
+
+			if(segment == UNWRITEBLE_CHUNK  || segment == SECOND_EMPTY_CHUNK ) {//If segment is invalid, false
+				return 0;//Returns false
+			} else if(segment == PARTLY_FULL_CHUNK ) {//Can't write to this segment
+				segment = UNWRITEBLE_CHUNK;//Replace it
+			}
+			if(bunkers[bunkerNum][segment] > 0){//If bunker segment is not already destroyed
+				erodeChunk(segment, 1, bunkerNum);//Erode the segment
+				bunkers[bunkerNum][segment] = 0;//Destroy the segment because aliens destroy what they touch
+				return 1;//Return true
+			}
+		}
+	}
+	return 0;//Return false otherwise
+}
+
+//Are we hitting an alien
+static int8_t isHittingAlien(int32_t x, int32_t y) {
+	if((x > screenState_getSwarmX()) && (x < screenState_getSwarmX() + ALIEN_RIGHT_SIDE_HIT ) && y > screenState_getSwarmY() && y < screenState_getSwarmY() + SWARM_HEIGHT  + BULLET_LOOKAHEAD ) {//If bullet is inside swarm
+		int16_t column = (x - screenState_getSwarmX()) / ALIEN_WIDTH_IN_SWARM ;//Find out which column
+		int8_t i;//To index through column
+		for(i = SWARM_MAX_ROW_INDEX ; i >= 0; --i) {
+			if(screenState_swarmArray[i * ALIEN_HEIGHT_IN_SWARM  + column]) {//If there's an alien in that index
+				if(i * ALIEN_HEIGHT_IN_SWARM  + screenState_getSwarmY() + ALIEN_WIDTH_IN_SWARM  >= y){//And at that row
+					screenState_killAlien(i * ALIEN_HEIGHT_IN_SWARM  + column);//We hit an alien!
+					return 1;//Return true because we hit an alien
+				}
+			}
+		}
+	}
+	return 0;//False because we didn't hit one
+}
+
+//Is ta bullet hitting hte bunker
+static int8_t isHittingBunker(int32_t x, int32_t y) {
+	if(y <= BUNKER_HEIGHT + BUNKER_HEIGHT_OFFSET   &&  y >=  BUNKER_HEIGHT){//If inside a bunker
+		int32_t bunkerNum = (x - BUNKER_OFFSET) / BUNKER_SPACE;//Calculate which bunker
+
+		if(bunkerNum > BUNKER_INDEX_MAX  || bunkerNum < 0){//If invalid bunker
+			return 0;//Return false becuase bunker is invalid
+		}
+
+		uint32_t localX = x - ((bunkerNum * BUNKER_SPACE) + BUNKER_OFFSET);//X location relative to edge of bunker
+		uint32_t localY = y - BUNKER_HEIGHT;//Y location relative to edge of bunker
+
+		//If localX is valid
+		if(localX < MAX_VALID_LOCAL_X ) {
+			int8_t column = localX / SEGMENT_DIMENSION ;//Calculate which column
+			int8_t row = localY / SEGMENT_DIMENSION ;//Calculate which row
+			int8_t segment = row * NOT_ERRODED_STATE  + column;//Use those to find the segment
+
+			if(segment == UNWRITEBLE_CHUNK  || segment == SECOND_EMPTY_CHUNK ) {//Can't erode segment 9 or 10
+				return 0;//They don't count
+			} else if(segment == PARTLY_FULL_CHUNK ) {//Segment 11 maps to segment 9
+				segment = UNWRITEBLE_CHUNK ;//Set to segment 9
+			}
+			if(bunkers[bunkerNum][segment] > 0){//If not already destoryed
+				erodeChunk(segment, bunkers[bunkerNum][segment], bunkerNum);//Erode chunk
+				bunkers[bunkerNum][segment]--;//Set errosion state down
+				return 1;//Return true
+			}
+		}
+	}
+	return 0;//Otherwise we didn't hit anything
+}
+
+//Is collision with saucer?
+static int8_t isHittingSaucer(int32_t x, int32_t y) {
+	if(saucerMoving && x >= saucerPos && x <= saucerPos + SAUCER_OFFSET  && y >= SAUCER_HEIGHT && y <= SAUCER_HEIGHT + BULLET_SAUCER_HIT_OFFSET ) {//Check X and Y pos of saucer with x and y
+		saucerMoving = 0;//We hit so stop saucer
+		aliens_drawObject(saucerPos, SAUCER_HEIGHT, saucerPos, SAUCER_HEIGHT, saucer, BLACK, 1);//Black out saucer
+		saucerPrintTime = SAUCER_SCORE_TIME;//Start timer to show score printed from saucer
+		saucer_score_x = x;//Set x of score
+		saucer_score_y = y;//Set y of score
+		uint32_t score = SAUCER_MIN_SCORE  + (rand() % SAUCER_SCORE_RANGE );
+		scoreBoard_printNumber(score, (x) * PIXEL_TO_CHUNK , (y - BULLET_SAUCER_HIT_OFFSET ) * PIXEL_TO_CHUNK , RED);//Show the score
+		score += score;//Your score is the x value of the saucer
+		scoreBoard_changeScore(score);//Print score!
+		return 1;//True because you hit the saucer
+	}
+	return 0;//You didnt' hit the saucer
+}
+
+//Is this a colision with the tank
+static int8_t isHittingTank(int32_t x, int32_t y) {
+	if(!tankDying && x >= tankPos && x <= tankPos + TANK_LEFT_OFFSET  && y >= TANK_Y && y <= TANK_Y + TANK_RIGHT_OFFSET ) {//Check if inside tank
+		tankDying = 1;//If so, you're dead tank!
+		return 1;//Tank was hit so return true
+	}
+	return 0;//Tanks didn't get hit
+}
+
+//Just calls each helper function to see if there is ANY collision
+static int8_t isHittingSomething(int32_t x, int32_t y) {
+	if(isHittingAlien(x,y) || isHittingBunker(x,y) || isHittingSaucer(x,y) || isHittingTank(x,y)) {//If a colision
+		return 1;//Return true
+	}
+	return 0;//Return false
+}
+
+//Draws all the bullets
+static void drawBullets(int32_t color) {
+	int8_t i;//For indeixing
+	for(i = 0; i < NUMBER_OF_BULLETS ; i++) {//For each bullet
+		if(bullets[i][1]) {
+			switch (bulletTypes[i]){//Switch on bullet type
+			case TANK_BULLET_INDEX :
+				aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X ], bullets[i][BULLET_Y ] - BULLET_WIDTH_OFFSET_VALUE , alien_bullet_0, color, 1);//Draw corresponding bullet type
+				break;
+			case FIRST_ALIEN_BULLET :
+				if(bullets[i][BULLET_Y] % IS_EVEN ){
+					aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ] - BULLET_WIDTH_OFFSET_VALUE, bullets[i][BULET_X ], bullets[i][BULLET_Y ] - BULLET_WIDTH_OFFSET_VALUE , alien_bullet_1_ODD, BLACK, 0);//Draw corresponding bullet type
+					aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X ], bullets[i][BULLET_Y ] , alien_bullet_1_EVEN, color, 0);//Draw corresponding bullet type
+				}
+				else{
+					aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ] - BULLET_WIDTH_OFFSET_VALUE, bullets[i][BULET_X ], bullets[i][BULLET_Y ] - BULLET_WIDTH_OFFSET_VALUE , alien_bullet_1_EVEN, BLACK, 0);//Draw corresponding bullet type
+					aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X ], bullets[i][BULLET_Y ] , alien_bullet_1_ODD, color, 0);//Draw corresponding bullet type				}
+				}
+				break;
+			case SECOUND_ALIEN_BULLET :
+				if(bullets[i][BULLET_Y] % IS_EVEN ){
+					aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ] - BULLET_WIDTH_OFFSET_VALUE, bullets[i][BULET_X ], bullets[i][BULLET_Y ] - BULLET_WIDTH_OFFSET_VALUE , alien_bullet_2_ODD, BLACK, 0);//Draw corresponding bullet type
+					aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X ], bullets[i][BULLET_Y ] , alien_bullet_2_EVEN, color, 0);//Draw corresponding bullet type
+				}
+				else{
+					aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ] - BULLET_WIDTH_OFFSET_VALUE, bullets[i][BULET_X ], bullets[i][BULLET_Y ] - BULLET_WIDTH_OFFSET_VALUE , alien_bullet_2_EVEN, BLACK, 0);//Draw corresponding bullet type
+					aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X ], bullets[i][BULLET_Y ] , alien_bullet_2_ODD, color, 0);//Draw corresponding bullet type				}
+				}
+				break;
+			case THIRD_ALIEN_BULLET :
+				aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X ], bullets[i][BULLET_Y ] + BULLET_WIDTH_OFFSET_VALUE , tank_bullet, color, 1);//Draw corresponding bullet type
+				break;
+			default:
+				break;//Should never be here
+			}
+		}
+	}
+}
+
+//Updates the entire swarm
+static void swarm_update() {
+	static int16_t ticks = 0;//Count ticks
+	if(ticks++ > SWARM_TICKS_TO_MOVE) {//If ticks have expired
+		screenState_moveSwarm();//Move the swarm
+		ticks = 0;//Reset counter
+	}
+	if((rand() % ALIEN_FIRE_FREQUENCY ) == 1){//Fire alien bullet at random
+		screenState_alienFire();//Call helper function to fire
+	}
+}
+
+//Update tank position
+static void tank_update(int32_t currentButtonStateDebounced) {
+	static int16_t ticks = 0;//Counter
+	static int16_t dieSwitches = 0;//Draw death animation counter
+	if(tankDying) {//If tank is doing death animation
+		if(ticks++ > SWITCH_DIE_TYPE) {//If time to switch death bitmap
+			ticks = 0;//Reset counter
+			if(dieSwitches++ > DONE_DYING){//If done with all death animation
+				scoreBoard_eraseLife();//Erase a life
+				if(numLives > 0) {//If you have more lives
+					numLives--;//Erase one
+					tankDying = 0;//Stop death animation
+					dieSwitches = 0;//Reset death animation counter
+					screenState_moveTankRight();//Move tank make it redraw
+				} else {
+					gameOver();//If your out of lives you lose!
+				}
+			}
+		} else {
+			aliens_killTank(tankPos, TANK_Y);//Otherwise kill the tank
+		}
+	} else {//Othewise check buttons and move tank accordingly
+		if(RIGHT_BUTTON_BIT & currentButtonStateDebounced) {//If move right if pressed
+			screenState_moveTankRight();//Move tank to right
+		}
+		if(LEFT_BUTTON_BIT & currentButtonStateDebounced) {//If move left is pressed
+			screenState_moveTankLeft();//Move tank left
+		}
+		if(SHOOT_BUTTON_MASK & currentButtonStateDebounced) {//If fire button pressed
+			screenState_tankFire();//Fire tank bullet
+		}
+	}
+}
+
+//Update saucer position
+static void saucer_update() {
+	saucerOldPos = saucerPos;//Save old position
+	if(saucerMoving == 0) {//If saucer is not moving
+		int16_t random = rand() % SAUCER_SHOW_UP_FREQUENCY ;//Decide wither it should be moving
+		if(random < PIXEL_TO_CHUNK ) {//If it should be
+			if(random % PIXEL_TO_CHUNK ) {//If it should be movint right
+				saucerMoving = SAUCER_MOVING_RIGHT;//Start it moving right
+				saucerPos = 0;//From left side of screen
+			} else {
+				saucerMoving = SAUCER_MOVING_LEFT;//Otherwise start if moving left
+				saucerPos = SCREEN_WIDHT_CHUNK  - SAUCER_WIDTH;//From right side of screen
+			}
+			aliens_drawObject(saucerPos, SAUCER_HEIGHT, saucerPos, SAUCER_HEIGHT, saucer, RED, 1);//The saucer is red
+		}
+		return;//We're done!
+	}
+	//If saucer is already moving
+	if(saucerMoving == SAUCER_MOVING_RIGHT) {
+		if(saucerPos >= SCREEN_WIDHT_CHUNK  - SAUCER_WIDTH) {//If it hit the edge
+			saucerMoving = 0;//Stop it
+			aliens_drawObject(saucerPos, SAUCER_HEIGHT, saucerPos, SAUCER_HEIGHT, saucer, BLACK, 1);//Get ride of saucer bitmap
+			return;//Done!
+		} else {
+			saucerPos++;//Otherwise keep the saucer moving
+		}
+	} else {
+		if(saucerPos <= 0) {//If saucer hit left edge
+			saucerMoving = 0;//Stop saucer!
+			aliens_drawObject(saucerPos, SAUCER_HEIGHT, saucerPos, SAUCER_HEIGHT, saucer, BLACK, 1);//Erase bitmap
+			return;//Done
+		} else {
+			saucerPos--;//Otherwise move the saucer
+		}
+	}
+	aliens_drawObject(saucerPos, SAUCER_HEIGHT, saucerOldPos, SAUCER_HEIGHT, saucer, RED, 1);//Redraw the saucer in it's new location
+}
+
+//For feature to be added later
+static void score_update() {
+	//Nothing for now
+}
+
+//For feature to be added later
+static void life_update() {
+	//Nothing for now
+}
+
+//Returns true if swarm is on the edge
+int8_t screenState_isOnEdge(){
+	return onEdge;//Return if on edge
+}
+
+//Initializes the state of the screen
+void screenState_init(){
+	int16_t row, col, i;//Helper variables
+	for (row = 0; row < SCREEN_HEIGHT_PIXEL ; row++) {//For each for and column
+		for (col = 0; col < SCREEN_WIDTH_PIXEL ; col++) {
+			screenState_getFramePointer()[row * SCREEN_WIDTH_PIXEL  + col] = BLACK; //Clear every row and column on screen
+		}
+	}
+	//For each alien
+	for(i = 0; i < SWARM_HEIGHT ; i++) {
+		screenState_swarmArray[i] = 1;//Set to true for living
+	}
+
+	screenState_setSwarmX(SWARM_START_X);//Set initial swarm location
+	screenState_setSwarmY(SWARM_START_Y);//Set initial swarm y location
+
+	//Initialize the bullet types
+	bulletTypes[TANK_BULLET_INDEX ] = TANK_BULLET ;//Tank has only one bullet type
+
+	bulletTypes[FIRST_ALIEN_BULLET] = CROSS_BULLET;//Squigly bullet
+	bulletTypes[SECOUND_ALIEN_BULLET] = SQUIGLY_BULLET;//Squigly bullet
+	bulletTypes[SECOUND_ALIEN_BULLET] = JAGGED_BULLET;//Cross bullet
+
+
+	//Draw the swarm
+	aliens_drawSwarm(screenState_getSwarmX(), screenState_getSwarmY(), screenState_getSwarmX(), screenState_getSwarmY(), screenState_getSwarmArray(), WHITE);
+	for(i = 0; i < SWARM_MAX_ROW_INDEX ; i++) {//For each bunker
+		aliens_drawObject((i * BUNKER_SPACE) + BUNKER_OFFSET, BUNKER_HEIGHT,(i * BUNKER_SPACE) + BUNKER_OFFSET, BUNKER_HEIGHT, bunker, GREEN, 1);//Draw the bunker
+		int8_t j;//For each segment in bunker
+		for(j = 0; j < SEGMENTS_PER_BUNKER ; j++) {
+			bunkers[i][j] = LITTLE_BIT_ERRODED_STATE  + 1;//Set it's erosion state to not erroded
+		}
+	}
+	screenState_moveTankLeft();//Move the tank to make it draw initialy
+	for(i = 0; i < NUMBER_OF_BULLETS ; i++) {//For each bullet
+		bullets[i][BULET_X] = 0;//Set x location to 0
+		bullets[i][BULLET_Y] = 0;//Set y location to 0
+	}
+	scoreBoard_drawScoreBoard();//Draw the score board
+	drawGround();//Draw the ground
+	srand(NUMBER_OF_BULLETS );//Seed the rand function
+}
+
+//Setter for frame pointer
+void screenState_setFramePointer(unsigned int * framePointer){
+	framePointer_g = framePointer;//Set frame pointer
+}
+
+//Getter for frame pointer
+unsigned int * screenState_getFramePointer(){
+	return framePointer_g;//Return frame pointer
+}
+
+//Setter for swarm location
+void screenState_setSwarmX(int32_t swarmX){
+	screenState_swarmX = swarmX;//Set the swarm location
+}
+
+//Getter for swarm location
+int32_t screenState_getSwarmX(){
+	return screenState_swarmX;//Return the swarm location
+}
+
+//Setter for swarm location
+void screenState_setSwarmY(int32_t swarmY){
+	screenState_swarmY = swarmY;//Set the swarm location
+}
+
+//Getter for swarm location
+int32_t screenState_getSwarmY(){
+	return screenState_swarmY;//Return the swarm location
+}
+
+//Moves the alien swarm one tick
+void screenState_moveSwarm() {
+	int32_t oldX = screenState_getSwarmX();//Score old location
+	int32_t oldY = screenState_getSwarmY();//Store old locaiton
+
+	int8_t numberOfDeadRowsRight = 0;//Number of dead rows on right
+	int8_t numberOfDeadRowsLeft = 0;//Dead row on left
+
+	//Calculate number of dead rows on either side so we move other enough
+	int8_t column;
+	for(column = 0; column < FIRST_SECOND_ROW ; column++) {//For each for
+		if(!screenState_swarmArray[column] &&//If row is completely dead
+		   !screenState_swarmArray[column + FIRST_SECOND_ROW ] &&
+		   !screenState_swarmArray[column + FIRST_THIRD_ROW  ] &&
+		   !screenState_swarmArray[column + FIRST_FOURTH_ROW ] &&
+		   !screenState_swarmArray[column + FIRST_FIFTH_ROW ]){
+			numberOfDeadRowsLeft++;//Increment the number
+		}else{
+			break;//We hit a live row so stop
+		}
+	}
+
+	for(column = LAST_ALIEN_ON_ROW ; column >= 0; --column) {//For each for
+		if(!screenState_swarmArray[column] &&//If row if completely dead
+		   !screenState_swarmArray[column + FIRST_SECOND_ROW ] &&
+		   !screenState_swarmArray[column + FIRST_THIRD_ROW  ] &&
+		   !screenState_swarmArray[column + FIRST_FOURTH_ROW ] &&
+		   !screenState_swarmArray[column + FIRST_FIFTH_ROW ]){
+			numberOfDeadRowsRight++;//Increment the count
+		}else{
+			break;//We hit a live one so stop
+		}
+	}
+	int32_t alienX;//X location of each alien
+	int32_t alienY;//Y location of each alien
+	//If we are on the edge
+	if((screenState_getSwarmX() + BULLET_MOVEMENT  >= ALIEN_EDGE   + (numberOfDeadRowsRight * ALIEN_WIDTH_IN_SWARM ) || screenState_getSwarmX() - BULLET_MOVEMENT  <= -(numberOfDeadRowsLeft * ALIEN_WIDTH_IN_SWARM )) && !goneDown) {
+		screenState_setSwarmY(screenState_getSwarmY() + ALIEN_MOVE_DOWN_DISTANCE );//Move down y
+		getAlienCoords(getLowestAlienRight(), &alienX, &alienY);//Lowest y of aliens
+		//Are aliens at tank level
+		if( alienY + ALIEN_HEIGHT_IN_SWARM  >= TANK_Y){
+			gameOver();//Game done because aliens are at tank level
+		}
+		//Otherwise just draw the swarm
+		aliens_drawSwarm(screenState_getSwarmX(), screenState_getSwarmY(), oldX, oldY, screenState_getSwarmArray(), WHITE);
+		goneDown = 1;//We have now gone down
+		onEdge = 1;//we are on the edge
+		return;//Done here
+	}
+
+	int32_t index = 0;//For indexing
+	if(screenState_swarmY % IS_EVEN) {//If going right
+		screenState_setSwarmX(screenState_getSwarmX() + BULLET_MOVEMENT );//Move right
+	} else {
+		screenState_setSwarmX(screenState_getSwarmX() - BULLET_MOVEMENT );//Move left otherwise
+	}
+	//For each alien
+	for(index = 0 ; index < SWARM_HEIGHT ; index++){
+		if(screenState_swarmArray[index]){
+			getAlienCoords(index, &alienX, &alienY);//Get ind alien coords
+			if(screenState_swarmY % IS_EVEN ) {//If going down
+				alienX += ALIEN_WIDTH_IN_SWARM ;//Move to the next alien
+			}
+			isAlienHittingBunker(alienX, alienY);//Check if this aien is hitting a bunker
+		}
+	}
+	//Check for hitting for corner alien
+	goneDown = 0;//We have not gone down
+	onEdge = 0;//Not on the edge either
+	//Finally draw the swarm
+	aliens_drawSwarm(screenState_getSwarmX(), screenState_getSwarmY(), oldX, oldY, screenState_getSwarmArray(), WHITE);
+}
+
+//Getter for swarm array
+int8_t * screenState_getSwarmArray() {
+	return screenState_swarmArray;//Get swarm array
+}
+
+//Moves the tank to right
+void screenState_moveTankRight(){
+	if(tankPos >= TANK_EDGE_RIGHT_CHUNKS  ){//If on edge
+		return;//Don't do anything
+	}
+	tankPos++;//Otherwise move right
+	aliens_drawObject(tankPos, TANK_Y, tankPos - 1, TANK_Y, tank, GREEN, 1);//Draw tank in new position
+
+}
+
+//Moves the tank to left
+void screenState_moveTankLeft(){
+	if(tankPos <= 0){//If on edge
+		return;//Don't do anything
+	}
+	tankPos--;//Otherwise move left
+	aliens_drawObject(tankPos, TANK_Y, tankPos + 1, TANK_Y, tank, GREEN, 1);//Draw tank in new position
+}
+
+//Kills given alien index
+void screenState_killAlien(int8_t alienToKill){
+	screenState_swarmArray[alienToKill] = 0;//Set alien to dead
+	if(getLowestAlienRight() == NO_MORE_ALIENS_YAY ){//If all aliens are dead
+		gameOver();//Game over cause all the aliens died
+	}
+
+	//Now we have to black out dead alien
+	int32_t x;//Helper variable for getAlienCoords
+	int32_t y;//Helper variable for getAlienCoords
+	getAlienCoords(alienToKill, &x, &y);//Get coords of alien to kill
+	deadAlienX = x;//Set this as the dead alien
+	deadAlienY = y;//Set this as the dead alien
+	explosionCountDown = DONE_DYING;//Start explosion counter
+	aliens_drawObject(x, y, x, y, explosion, WHITE, 1);//Draw explosion, this will be erased by another function
+
+	if(alienToKill / FIRST_SECOND_ROW  == NUM_BUNKERS  || alienToKill / FIRST_SECOND_ROW  == BULLET_MOVEMENT )//Ten points for bottom two rows
+		score += POINTS_FOR_BOTTOM_ALIENS ;//Ten points for bottom two rows
+	else if(alienToKill / FIRST_SECOND_ROW == IS_EVEN  || alienToKill / FIRST_SECOND_ROW == 1){//Twenty points for next two rows
+		score += POINTS_FOR_MIDDLE_ALIENS ;//Twenty points for next two rows
+	}else if(alienToKill / FIRST_SECOND_ROW == 0){//Forty points for top row
+		score += POINTS_FOR_TOP_ALIENS ;//Forty points for top row
+	}
+	scoreBoard_changeScore(score);//Draw new score
+}
+
+//Fires a alien bullet from a random alien
+void screenState_alienFire() {
+	int8_t i;//For for loop
+	int8_t j;//Used in for loop
+	//For each alien bullet (0 is the tank bullet)
+	for(i = 1; i < NUMBER_OF_BULLETS ; i++) {
+		if(!bullets[i][1]) {//If avaliable
+			int16_t column = rand() % FIRST_SECOND_ROW ;//Pic a randome alien
+			for(j = SWARM_MAX_ROW_INDEX; j >= 0; --j) {//Move up if that alien column has one dead or multiple dead
+				if(screenState_swarmArray[j * FIRST_SECOND_ROW  + column]){//Found bottom most alien
+					bullets[i][0] = screenState_getSwarmX() + (column) * ALIEN_WIDTH_IN_SWARM  + ALIEN_MOVE_DOWN_DISTANCE ;//Fire bullet!
+					bullets[i][1] = screenState_getSwarmY() + BULLET_OFFSET + ALIEN_WIDTH_IN_SWARM  - ((SWARM_MAX_ROW_INDEX - j) * (ALIEN_HEIGHT_IN_SWARM  + 1));//Fire bullet Y location as well
+					drawBullets(WHITE);//Draw that new alien bullet
+					return;//Done here
+				}
+			}
+			screenState_alienFire();//Repeat if we couldn't find an alien in the column to fire
+			return;//Done!
+		}
+	}
+}
+
+//Fires a tank bullet
+void screenState_tankFire() {
+	if(!bullets[TANK_BULLET_INDEX][BULLET_Y ]) {//If a bullet is not already fired
+		bullets[TANK_BULLET_INDEX][BULET_X ] = tankPos + SWARM_MAX_ROW_INDEX;//Set bullet x location
+		bullets[TANK_BULLET_INDEX][BULLET_Y ] = TANK_Y - TANK_BULLET_START_Y ;//Set bullet y location
+		drawBullets(WHITE);//Draw new tank bullet!
+	}
+}
+//Update all the bullets
+void screenState_updateBullets() {
+	if(updateBulletCount == 0){//If it's time to update bullets
+		updateBulletCount = UPDATE_BULLET_MAX_COUNT;//Reset counter
+		int8_t i;//For indexing
+		if(bullets[TANK_BULLET_INDEX ][1]) {//If Tank bullet is out
+			//If tank bullet is not hitting somehting
+			if((bullets[TANK_BULLET_INDEX ][BULLET_Y] > TANK_WIDTH ) && (!isHittingSomething(bullets[TANK_BULLET_INDEX ][BULET_X ] + 1, bullets[TANK_BULLET_INDEX ][BULLET_Y ] - MISSLE_MOVEMENT_PER_TICK ) && !isHittingSomething(bullets[0][BULET_X ] + IS_EVEN, bullets[TANK_BULLET_INDEX ][BULLET_Y ] - MISSLE_MOVEMENT_PER_TICK ) && !isHittingSomething(bullets[TANK_BULLET_INDEX ][BULET_X ], bullets[TANK_BULLET_INDEX ][BULLET_Y ] - MISSLE_MOVEMENT_PER_TICK ))){
+				bullets[TANK_BULLET_INDEX ][BULLET_Y] -= MISSLE_MOVEMENT_PER_TICK ;//Move tank bullet up
+			} else{
+				//Otherwise get rid of tank bullet
+				aliens_drawObject( bullets[TANK_BULLET_INDEX ][BULET_X ],  bullets[TANK_BULLET_INDEX ][BULLET_Y ], bullets[TANK_BULLET_INDEX ][BULET_X ], bullets[TANK_BULLET_INDEX ][BULLET_Y ], tank_bullet, BLACK, 1);
+				//Set tank bullet to parking space (not in use)
+				bullets[TANK_BULLET_INDEX][BULLET_Y ] = 0;
+			}
+		}
+		//For each ALIEN bullet
+		for(i = 1; i < NUMBER_OF_BULLETS ; i++) {
+			//If not hitting something
+			if(bullets[i][BULLET_Y ] && (bullets[i][BULLET_Y ] < ALIEN_BULLET_STOP) && !isHittingSomething(bullets[i][BULET_X ] + 1, bullets[i][1] + BULLET_ALIEN_OFFSET_START ) && !isHittingSomething(bullets[i][BULET_X ] + IS_EVEN, bullets[i][BULLET_Y ] + BULLET_ALIEN_OFFSET_START ) && !isHittingSomething(bullets[i][BULET_X ], bullets[i][BULLET_Y ] + BULLET_ALIEN_OFFSET_START )) {
+				bullets[i][BULLET_Y ] += MISSLE_MOVEMENT_PER_TICK;//Move bullet down
+			} else {
+				//Otherwise we need to remove bullet
+				switch (bulletTypes[i]){//Depending on type of bullet
+					case 0:
+						aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X], bullets[i][BULLET_Y], alien_bullet_0, BLACK, 1);//Del correct bullet type
+						break;
+					case 1:
+						aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X], bullets[i][BULLET_Y], alien_bullet_1_EVEN, BLACK, 1);//Del correct bullet type
+						aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X], bullets[i][BULLET_Y], alien_bullet_1_ODD, BLACK, 1);//Del correct bullet type
+						break;
+					case 2:
+						aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X ], bullets[i][BULLET_Y ] , alien_bullet_2_ODD, BLACK, 0);//Draw corresponding bullet type				}
+						aliens_drawObject(bullets[i][BULET_X ], bullets[i][BULLET_Y ], bullets[i][BULET_X ], bullets[i][BULLET_Y ] , alien_bullet_2_EVEN, BLACK, 0);//Draw corresponding bullet type				}
+						break;
+					default:
+						break;//Should never be here
+				}
+				bullets[i][BULLET_X] = 0;//Set bullet to parking space
+				bullets[i][BULLET_Y] = 0;//Set bullet to parking space
+			}
+		}
+		drawBullets(WHITE);//Draw the bullet!
+	}else{
+		updateBulletCount --;//Otherwise decrement counter and wait to be called again
+	}
+
+}
+
+//Erodes given bunker at random
+void screenState_erodeBunker(int8_t bunker) {
+	int8_t i;//For indexing
+	//For each segment in bunker
+	for(i = 0; i < SEGMENTS_PER_BUNKER ; i++) {
+		int8_t state = bunkers[bunker][i];//Check the segments state
+		if(state) {//If ready to be erroded
+			erodeChunk(i, state, bunker);//Erode the chunk
+			bunkers[bunker][i]--;//Set it's state to erroded
+			return;//Done here!
+		}
+	}
+}
+
+//Updates the entire screen
+void screenState_update(int32_t currentButtonStateDebounced) {
+	screenState_updateBullets();//Update bullets
+	swarm_update();//Update alien swarm
+	tank_update(currentButtonStateDebounced);//Update tank
+	saucer_update();//Update saucer
+	score_update();//Update score
+	life_update();//Update lives
+	if(explosionCountDown == 1){//If alien is done exploding
+		aliens_drawObject(deadAlienX, deadAlienY, deadAlienX, deadAlienY, explosion, BLACK, 1);//Get rid of explosion artifact
+		deadAlienX = 0;//Clear buffer
+		deadAlienY = 0;//Clear buffer
+		aliens_drawObject(deadAlienX, deadAlienY, deadAlienX, deadAlienY, explosion, BLACK, 1);//Get rid of explosion artifact
+		explosionCountDown--;//Decrement timer
+	}else{
+		explosionCountDown--;//If not at end then decrement
+	}
+	if(saucerPrintTime == 1){//If saucer score print timer has expired
+		scoreBoard_printNumber(score, (saucer_score_x) * PIXEL_TO_CHUNK , (saucer_score_y - BULLET_SAUCER_HIT_OFFSET ) * PIXEL_TO_CHUNK , BLACK);//Get rid of artifact
+		saucerPrintTime--;//Decrement timer
+	}else{
+		saucerPrintTime--;//Otherwise just decrement the timer
+	}
+}

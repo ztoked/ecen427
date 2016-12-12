@@ -1,0 +1,8 @@
+-batch 
+-create nes_controller 
+-ver 1.00.a 
+-dir "E:\427\Lab7\HardWare" 
+-lang vhdl 
+-bus axi4lite s 
+-reg 1 
+-xps 

@@ -1,0 +1,28 @@
+//This file has functions for drawing objects in the game
+
+#include <stdint.h>
+
+typedef enum objectId {
+	alien_top = 0,
+	alien_middle = 1,
+	alien_bottom = 2,
+	tank = 3,
+	saucer = 4,
+	bunker = 5,
+	explosion = 6
+}objectId;
+
+typedef enum color {
+	WHITE = 0xFFFFFFFF,
+	GREEN = 0x0000FF00
+}color;
+
+
+//Draw an object on screen.
+//NOTE x, y coordinates are not pixels but chunk of four pixels
+//(aka 1,1 will print at pixel 2,2 and 5,5 will print at pixel 10,10)
+void aliens_drawObject(uint16_t x, uint16_t y, objectId object, uint32_t color);
+
+//Draw the alien swarm using the x,y values of the top left alien
+//The array is to be able to draw the aliens that are alive
+void aliens_drawSwarm(uint16_t x, uint16_t y, uint8_t aliens[]);

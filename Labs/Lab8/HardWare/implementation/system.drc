@@ -1,0 +1,274 @@
+Release 13.4 Drc O.87xd (nt64)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+
+Tue Dec 06 18:55:20 2016
+
+drc -z system.ncd system.pcf
+
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   axi_ac97_0/axi_ac97_0/AXI_LITE_IPIF_I/I_SLAVE_ATTACHMENT/rst_rstpot is
+   sourced by a combinatorial pin. This is not good design practice. Use the CE
+   pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   nes_controller_0/nes_controller_0/USER_LOGIC_I/cur_state[3]_GND_49_o_Mux_131_
+   o is sourced by a combinatorial pin. This is not good design practice. Use
+   the CE pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net axi_ac97_0_Interrupt is
+   sourced by a combinatorial pin. This is not good design practice. Use the CE
+   pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[10]_AND_58_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[11]_AND_56_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[12]_AND_54_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[20]_AND_38_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[13]_AND_52_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[21]_AND_36_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[14]_AND_50_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[22]_AND_34_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[30]_AND_18_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[31]_AND_16_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[15]_AND_48_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[23]_AND_32_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[16]_AND_46_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[24]_AND_30_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[17]_AND_44_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[25]_AND_28_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[18]_AND_42_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[26]_AND_26_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[19]_AND_40_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[27]_AND_24_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[28]_AND_22_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[29]_AND_20_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   nes_controller_0/nes_controller_0/USER_LOGIC_I/interruptNext is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   nes_controller_0/nes_controller_0/USER_LOGIC_I/cur_state[3]_GND_56_o_Mux_145_
+   o is sourced by a combinatorial pin. This is not good design practice. Use
+   the CE pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   nes_controller_0/nes_controller_0/USER_LOGIC_I/cur_state[3]_GND_55_o_Mux_143_
+   o is sourced by a combinatorial pin. This is not good design practice. Use
+   the CE pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   nes_controller_0/nes_controller_0/USER_LOGIC_I/cur_state[3]_GND_54_o_Mux_141_
+   o is sourced by a combinatorial pin. This is not good design practice. Use
+   the CE pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   nes_controller_0/nes_controller_0/USER_LOGIC_I/cur_state[3]_GND_53_o_Mux_139_
+   o is sourced by a combinatorial pin. This is not good design practice. Use
+   the CE pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   nes_controller_0/nes_controller_0/USER_LOGIC_I/cur_state[3]_GND_52_o_Mux_137_
+   o is sourced by a combinatorial pin. This is not good design practice. Use
+   the CE pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   nes_controller_0/nes_controller_0/USER_LOGIC_I/cur_state[3]_GND_51_o_Mux_135_
+   o is sourced by a combinatorial pin. This is not good design practice. Use
+   the CE pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   nes_controller_0/nes_controller_0/USER_LOGIC_I/cur_state[3]_GND_50_o_Mux_133_
+   o is sourced by a combinatorial pin. This is not good design practice. Use
+   the CE pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[0]_AND_78_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[1]_AND_76_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[2]_AND_74_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[3]_AND_72_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[4]_AND_70_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[5]_AND_68_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[6]_AND_66_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[7]_AND_64_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[8]_AND_62_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   pit_0/pit_0/USER_LOGIC_I/Bus2IP_Resetn_slv_reg0[9]_AND_60_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_W
+   riteThrough.DCache_I1/Mram_cacheline_copy5_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_W
+   riteThrough.DCache_I1/Mram_cacheline_copy1_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[9].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_W
+   riteThrough.DCache_I1/Mram_cacheline_copy2_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_W
+   riteThrough.DCache_I1/Mram_cacheline_copy3_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_W
+   riteThrough.DCache_I1/Mram_cacheline_copy4_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[7].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[2].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[8].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[6].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[5].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[3].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[0].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block_BRAM_Addr<30>> is
+   incomplete. The signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[13].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[10].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[11].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[1].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[12].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[14].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[15].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register
+   _File_I/Using_LUT6.All_RAM32M[4].ram32m_i_RAMD_D1_O> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block_BRAM_Addr<31>> is
+   incomplete. The signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:2410 - This design is using one or more 9K Block RAMs
+   (RAMB8BWER).  9K Block RAM initialization data, both user defined and
+   default, may be incorrect and should not be used.  For more information,
+   please reference Xilinx Answer Record 39999.
+DRC detected 0 errors and 67 warnings.  Please see the previously displayed
+individual error or warning messages for more details.

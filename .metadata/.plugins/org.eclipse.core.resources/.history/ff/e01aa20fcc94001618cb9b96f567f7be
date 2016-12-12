@@ -1,0 +1,28 @@
+import java.io.*;
+
+public class soundConverter {
+	public static void main(String [] args) {
+		// The name of the file to open.
+        String inFileName = args[0];
+        String outFileName = args[1] + ".c";
+        
+        try {
+            // FileReader reads text files in the default encoding.
+        	FileInputStream inStream = new FileInputStream(inFileName);
+        	int val = -1;
+        	while((val = inStream.read()) != -1) {
+        		
+        	}
+            
+            inStream.close();        
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                "Unable to open file '" + 
+                		inFileName + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println("Error reading file '" + inFileName + "'");
+        }
+	}
+}

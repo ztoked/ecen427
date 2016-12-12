@@ -1,0 +1,16 @@
+#include "aliens.h"
+
+void aliens_drawAlien(uint16_t x, uint16_t y) {
+	int row = 0;
+	int col = 0;
+	for (row = 0; row < ALIEN_HEIGHT; row++) {
+		for (col = 0; col < WORD_WIDTH; col++) {
+			if ((topOutAlienSymbol[row] & (1 << (WORD_WIDTH - 1 - col)))) {
+				framePointer0[row * 640 + col] = 0x00FF0000; // frame 0 is red here.
+			} else {
+				framePointer0[row * 640 + col] = 0x000000000; // frame 0 is red here.
+			}
+		}
+	}
+
+}

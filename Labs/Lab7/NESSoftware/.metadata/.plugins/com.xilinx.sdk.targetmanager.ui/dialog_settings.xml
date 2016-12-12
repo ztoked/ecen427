@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="false" key="HardWare_hw_platform-runResetZynq"/>
+	<item value="E:\427\Lab7\NESSoftware\HardWare_hw_platform\system.bit" key="HardWare_hw_platform-bitFile"/>
+	<item value="HardWare_hw_platform" key="programfpga.hwplatform"/>
+	<item value="Local" key="HardWare_hw_platform-target"/>
+	<item value="E:\427\Lab7\NESSoftware\HardWare_hw_platform\system_bd.bmm" key="HardWare_hw_platform-bmmFile"/>
+	<item value="bootloop" key="HardWare_hw_platform-microblaze_0-initElf"/>
+</section>

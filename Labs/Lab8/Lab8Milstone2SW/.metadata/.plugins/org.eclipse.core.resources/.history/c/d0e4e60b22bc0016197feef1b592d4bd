@@ -1,0 +1,7 @@
+#include "xil_io.h"
+#include <stdint>
+//Init called before anything else
+void dmaDriver_setReadAddr(uint32_t addr);
+
+//Sets count down from value
+void dmaDriver_setWriteAddr(uint32_t addr);

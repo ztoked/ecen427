@@ -1,0 +1,42 @@
+#include "sounds.h"
+#include "xac97_l.h"
+#include "xparameters.h"
+
+uint8_t ** soundData;
+uint32_t currentSample;
+uint32_t numberOfSamples;
+
+void sounds_init() {
+	XAC97_HardReset(XPAR_AXI_AC97_0_BASEADDR);
+	XAC97_AwaitCodecReady(XPAR_AXI_AC97_0_BASEADDR);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_ExtendedAudioStat, 1);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCM_DAC_Rate, 11025);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVol, AC97_VOL_MAX);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_AuxOutVol, AC97_VOL_MAX);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVolMono, AC97_VOL_MAX);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCBeepVol, AC97_VOL_MAX);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCMOutVol, AC97_VOL_MAX);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_LineInVol, AC97_VOL_MAX);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MicVol, AC97_VOL_MAX);
+	XAC97_ClearFifos(XPAR_AXI_AC97_0_BASEADDR);
+	XAC97_mSetControl(XPAR_AXI_AC97_0_BASEADDR, AC97_IN_FIFO_OFFSET);
+}
+void sounds_sendSound(uint32_t samples, uint8_t soundArray[]) {
+	uint32_t i = 0;
+	uint8_t sample;
+	while(i < samples) {
+		sample = soundArray[i];
+		XAC97_WriteFifo(XPAR_AXI_AC97_0_BASEADDR, sample);
+		++i;
+	}
+}
+
+
+void ac97_interrupt_handler() {
+	uint32_t i = 0;
+
+	sounds_sendSound(march1Samples, march1Data);
+
+	XAC97_mSetInFifoData(BaseAddress, sample);
+
+}

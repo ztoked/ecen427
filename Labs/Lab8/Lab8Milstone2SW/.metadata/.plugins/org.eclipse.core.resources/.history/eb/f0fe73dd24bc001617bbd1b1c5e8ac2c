@@ -1,0 +1,13 @@
+#include "dmaDriver.h"
+#include "xparameters.h"
+
+//Init called before anything else
+void dmaDriver_setReadAddr(uint32_t addr){
+	Xil_Out32(XPAR_DMA_0_BASEADDR + 4, addr);//Set the read address
+}
+
+//Sets count down from value
+void dmaDriver_setWriteAddr(uint32_t addr){
+	Xil_Out32(XPAR_DMA_0_BASEADDR + 8, addr);//Set the read address
+}
+

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="E:\427\Lab1\HelloWorldHW_hw_platform\system_bd.bmm" key="HelloWorldHW_hw_platform-bmmFile"/>
+	<item value="E:\427\Lab1\hello_world_0\Debug\hello_world_0.elf" key="HelloWorldHW_hw_platform-microblaze_0-initElf"/>
+	<item value="E:\427\Lab1\HelloWorldHW_hw_platform\system.bit" key="HelloWorldHW_hw_platform-bitFile"/>
+</section>

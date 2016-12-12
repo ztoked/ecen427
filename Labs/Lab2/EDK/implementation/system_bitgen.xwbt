@@ -1,0 +1,7 @@
+INFILE=F:\427\Lab2\EDK\implementation\system.ncd
+OUTFILE=F:\427\Lab2\EDK\implementation\system.bit
+FAMILY=Spartan6
+PART=xc6slx45-3csg324
+WORKINGDIR=F:\427\Lab2\EDK\implementation
+LICENSE=ISE
+USER_INFO=174672765_1777505556_210596263_102

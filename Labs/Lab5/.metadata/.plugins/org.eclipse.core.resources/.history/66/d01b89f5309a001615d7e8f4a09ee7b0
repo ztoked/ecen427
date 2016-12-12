@@ -1,0 +1,21 @@
+#include "sounds.h"
+#include "xac97_l.h"
+#include "xparameters.h"
+
+void sounds_init() {
+	XAC97_HardReset(XPAR_AXI_AC97_0_BASEADDR);
+	XAC97_AwaitCodecReady(XPAR_AXI_AC97_0_BASEADDR);
+	XAC97_WriteReg(BaseAddress, AC97_ExtendedAudioStat, 1);
+	//set frequency
+	//set volumes
+	XAC97_ClearFifos(XPAR_AXI_AC97_0_BASEADDR);
+	XAC97_mSetControl(XPAR_AXI_AC97_0_BASEADDR, AC97_IN_FIFO_OFFSET);
+}
+void sounds_sendSound(uint32_t rate, uint32_t samples, uint8_t soundArray[]) {
+
+	while( sound_ptr < (Xuint32*)EndAddress ) {
+		sample = *sound_ptr;
+		sound_ptr = sound_ptr + 1;
+		XAC97_WriteFifo(BaseAddress, sample);
+  }
+}

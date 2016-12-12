@@ -1,0 +1,6 @@
+//This file has functions for drawing objects in the game
+
+#include <stdint.h>
+
+void aliens_drawAlien(uint16_t x, uint16_t y);
+void aliens_drawSaucer(uint16_t x, uint16_t y);

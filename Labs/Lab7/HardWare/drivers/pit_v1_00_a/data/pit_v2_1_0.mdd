@@ -1,0 +1,15 @@
+##############################################################################
+## Filename:          C:\git\ECEN427\lab5\SpaceInvadersHW/drivers/pit_v1_00_a/data/pit_v2_1_0.mdd
+## Description:       Microprocessor Driver Definition
+## Date:              Tue Nov 01 18:27:22 2016 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+OPTION psf_version = 2.1.0;
+
+BEGIN DRIVER pit
+
+  OPTION supported_peripherals = (pit);
+  OPTION depends = (common_v1_00_a);
+  OPTION copyfiles = all;
+
+END DRIVER

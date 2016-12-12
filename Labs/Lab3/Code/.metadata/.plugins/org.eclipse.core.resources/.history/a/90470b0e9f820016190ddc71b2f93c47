@@ -1,0 +1,5 @@
+
+
+void screenState_setFramePointer(unsigned int * framePointer);
+
+unsigned int * screenState_getFramePointer();

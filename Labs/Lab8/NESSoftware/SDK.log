@@ -1,0 +1,62 @@
+13:07:33 INFO  : Resetting C/C++ perspective as the workspace is found to be created before 14.3
+13:07:40 WARN  :  [Hsm 55-1484] MSS file doesn't have NAME. So assuming NAME as system
+13:07:40 ERROR :  [Hsm 55-1594] Core cpu of version 1.13.a not found in repositories
+ [Hsm 55-1594] Core s6_ddrx of version 1.00.a not found in repositories
+ [Hsm 55-1594] Core gpio of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core uartlite of version 2.00.a not found in repositories
+ [Hsm 55-1594] Core intc of version 2.03.a not found in repositories
+ [Hsm 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ [Hsm 55-1594] Core axivdma of version 4.00.a not found in repositories
+ [Hsm 55-1594] Core uartlite of version 2.00.a not found in repositories
+ [Hsm 55-1594] Core bram of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core bram of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core standalone of version 3.03.a not found in repositories
+13:07:40 ERROR : Failed to generate BSP due to invalid mss path
+13:07:40 WARN  :  [Hsm 55-1484] MSS file doesn't have NAME. So assuming NAME as system
+13:07:40 ERROR :  [Hsm 55-1594] Core cpu of version 1.13.a not found in repositories
+ [Hsm 55-1594] Core s6_ddrx of version 1.00.a not found in repositories
+ [Hsm 55-1594] Core gpio of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core uartlite of version 2.00.a not found in repositories
+ [Hsm 55-1594] Core intc of version 2.03.a not found in repositories
+ [Hsm 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ [Hsm 55-1594] Core axivdma of version 4.00.a not found in repositories
+ [Hsm 55-1594] Core uartlite of version 2.00.a not found in repositories
+ [Hsm 55-1594] Core bram of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core bram of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core standalone of version 3.03.a not found in repositories
+13:07:40 WARN  :  [Hsm 55-1484] MSS file doesn't have NAME. So assuming NAME as system
+13:07:40 ERROR :  [Hsm 55-1594] Core cpu of version 1.13.a not found in repositories
+ [Hsm 55-1594] Core s6_ddrx of version 1.00.a not found in repositories
+ [Hsm 55-1594] Core gpio of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core uartlite of version 2.00.a not found in repositories
+ [Hsm 55-1594] Core intc of version 2.03.a not found in repositories
+ [Hsm 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ [Hsm 55-1594] Core axivdma of version 4.00.a not found in repositories
+ [Hsm 55-1594] Core uartlite of version 2.00.a not found in repositories
+ [Hsm 55-1594] Core bram of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core bram of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core standalone of version 3.03.a not found in repositories
+13:07:40 WARN  :  [Hsm 55-1484] MSS file doesn't have NAME. So assuming NAME as system
+13:07:40 ERROR :  [Hsm 55-1594] Core cpu of version 1.13.a not found in repositories
+ [Hsm 55-1594] Core s6_ddrx of version 1.00.a not found in repositories
+ [Hsm 55-1594] Core gpio of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core uartlite of version 2.00.a not found in repositories
+ [Hsm 55-1594] Core intc of version 2.03.a not found in repositories
+ [Hsm 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ [Hsm 55-1594] Core axivdma of version 4.00.a not found in repositories
+ [Hsm 55-1594] Core uartlite of version 2.00.a not found in repositories
+ [Hsm 55-1594] Core bram of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core bram of version 3.00.a not found in repositories
+ [Hsm 55-1594] Core standalone of version 3.03.a not found in repositories
+13:07:40 INFO  : BSP Project P/hello_world_bsp_0 has been successfully migrated.
+13:08:34 ERROR : FPGA Configuration failed.Failed to download the bit file
+
+    Failed to verify DONE bit after configuring FPGA
+
+
+13:10:33 ERROR : FPGA Configuration failed.Failed to download the bit file
+
+    Failed to verify DONE bit after configuring FPGA
+
+
+13:10:44 ERROR : Unexpected error while parsing XMD response ?: com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: invalid number or unquoted string near 

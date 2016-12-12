@@ -1,0 +1,7 @@
+INFILE=E:\427\Lab8\HardWare\implementation\system.ncd
+OUTFILE=E:\427\Lab8\HardWare\implementation\system.bit
+FAMILY=Spartan6
+PART=xc6slx45-3csg324
+WORKINGDIR=E:\427\Lab8\HardWare\implementation
+LICENSE=WebPack
+USER_INFO=174672765_1777505556_210596263_102

@@ -1,0 +1,18 @@
+//This file has functions for drawing objects in the game
+
+#include <stdint.h>
+
+typedef enum objectId {
+	alien_top = 0,
+	alien_middle = 1,
+	alien_bottom = 2,
+	tank = 3,
+	saucer = 4,
+	bunker = 5,
+	explosion = 6
+}objectId;
+
+//Draw an object on screen.
+//NOTE x, y coordinates are not pixels but chunk of four pixels
+//(aka 1,1 will print at pixel 2,2 and 5,5 will print at pixel 10,10)
+void aliens_drawObject(uint16_t x, uint16_t y, objectId object);

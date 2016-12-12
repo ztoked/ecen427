@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "E:/427/Lab7/nesControllerVHD/test_isim_beh.exe" -prj "E:/427/Lab7/nesControllerVHD/test_beh.prj" "work.test" 

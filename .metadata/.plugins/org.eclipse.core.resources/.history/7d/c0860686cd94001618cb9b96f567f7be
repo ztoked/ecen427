@@ -1,0 +1,46 @@
+import java.io.*;
+
+public class soundConverter {
+	public static void main(String [] args) {
+		// The name of the file to open.
+        String inFileName = args[0];
+        String outFileName = args[1] + ".c";
+        
+        try {
+        	FileInputStream in = new FileInputStream(inFileName);
+        	FileWriter fileWriter = new FileWriter(outFileName);
+
+            // Always wrap FileReader in BufferedReader.
+        	BufferedWriter out = new BufferedWriter(fileWriter);
+        	
+        	int sampleRate = 0;
+        	int numSamples = 0;
+        	byte[] b = new byte[4];
+        	in.read(b, 24, 4);
+        	//sampleRate = b[3] << 24 + b[2] << 16 + b[1] << 8 + b[0];
+        	in.read(b, 40, 4);
+        	//numSamples = (b[3] << 24 + b[2] << 16 + b[1] << 8 + b[0]) / 16;
+        	int val = -1;
+        	int index = 0;
+        	while((val = in.read()) != -1) {
+        		if(index == 24) {
+        			
+        		}
+        		++index;
+        	}
+            
+            in.close();
+            System.out.println("sampleRate = " + sampleRate + "\nnumSamples = " + numSamples);
+            out.write("sampleRate = " + sampleRate + "\nnumSamples = " + numSamples);
+            out.close();
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                "Unable to open file '" + 
+                		inFileName + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println("Error reading file '" + inFileName + "'");
+        }
+	}
+}

@@ -1,0 +1,30 @@
+/*
+ * sounds.h
+ *
+ *  Created on: Oct 17, 2016
+ *      Author: superman
+ */
+#include <stdint.h>
+#ifndef SOUNDS_H_
+#define SOUNDS_H_
+
+typedef enum sounds_soundType{
+		march1,
+		march2,
+		march3,
+		march4,
+		tankFire,
+		tankExplode,
+		saucerFly1,
+		saucerFly2,
+		saucerExplode
+}sounds_soundType;
+
+
+void ac97_interrupt_handler();
+void sounds_init();
+void sounds_sendSound(uint32_t samples, uint8_t soundArray[]);
+void sounds_playSound();
+
+
+#endif /* SOUNDS_H_ */

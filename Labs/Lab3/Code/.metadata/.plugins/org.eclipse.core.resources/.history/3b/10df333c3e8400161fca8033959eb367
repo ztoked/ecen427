@@ -1,0 +1,155 @@
+
+//This file is for functions for clearing the screen and storing the state of the screen
+
+#include "screenState.h"
+#include "aliens.h"
+#include <stdlib.h>
+
+#define TANK_Y 200
+#define TANK_START_POS 160
+#define BUNKER_HEIGHT 150
+#define BUNKER_SPACE 75
+#define BUNKER_OFFSET 30
+#define BULLET_OFF_SCREEN 0
+#define BULLET_OFFSET 55
+static uint32_t screenState_swarmX = 0;
+static uint32_t screenState_swarmY = 0;
+static uint8_t screenState_swarmArray[55];
+static uint8_t goneDown = 0;
+static uint32_t tankPos = TANK_START_POS;
+static uint32_t bullets[5][2];
+
+
+static unsigned int * framePointer_g;
+
+void screenState_setFramePointer(unsigned int * framePointer){
+
+	framePointer_g = framePointer;
+
+}
+
+unsigned int * screenState_getFramePointer(){
+	return framePointer_g;
+}
+
+void screenState_clearScreen(){
+
+	uint16_t row, col, i;
+	for (row = 0; row < 480; row++) {
+		for (col = 0; col < 640; col++) {
+			screenState_getFramePointer()[row * 640 + col] = 0x000000000; // Black
+		}
+	}
+	for(i = 0; i < 55; i++) {
+		screenState_swarmArray[i] = 1;
+	}
+	screenState_setSwarmX(72);
+	screenState_setSwarmY(20);
+
+
+	aliens_drawSwarm(screenState_getSwarmX(), screenState_getSwarmY(), screenState_getSwarmArray(), WHITE);
+	for(i = 0; i < 4; i++) {
+		aliens_drawObject((i * BUNKER_SPACE) + BUNKER_OFFSET, BUNKER_HEIGHT, bunker, GREEN);
+	}
+	screenState_moveTankLeft();
+	for(i = 0; i < 5; i++) {
+		bullets[i][0] = 0;
+		bullets[i][1] = 0;
+	}
+	srand(5);
+}
+
+void screenState_setSwarmX(uint32_t swarmX){
+	screenState_swarmX = swarmX;
+}
+
+uint32_t screenState_getSwarmX(){
+	return screenState_swarmX;
+}
+
+void screenState_setSwarmY(uint32_t swarmY){
+	screenState_swarmY = swarmY;
+}
+
+uint32_t screenState_getSwarmY(){
+	return screenState_swarmY;
+}
+
+void screenState_moveSwarm() {
+	aliens_drawSwarm(screenState_getSwarmX(), screenState_getSwarmY(), screenState_getSwarmArray(), BLACK);
+	if((screenState_getSwarmX() == 144 || screenState_getSwarmX() == 0) && !goneDown) {
+		screenState_setSwarmY(screenState_getSwarmY() + 3);
+		aliens_drawSwarm(screenState_getSwarmX(), screenState_getSwarmY(), screenState_getSwarmArray(), WHITE);
+		goneDown = 1;
+		return;
+	}
+	if(screenState_swarmY %2) {
+		screenState_setSwarmX(screenState_getSwarmX() + 3);
+	} else {
+		screenState_setSwarmX(screenState_getSwarmX() - 3);
+	}
+	goneDown = 0;
+	//screenState_setSwarmY(screenState_getSwarmY() + 1);
+	aliens_drawSwarm(screenState_getSwarmX(), screenState_getSwarmY(), screenState_getSwarmArray(), WHITE);
+}
+
+uint8_t * screenState_getSwarmArray() {
+	return screenState_swarmArray;
+}
+
+void screenState_moveTankRight(){
+	if(tankPos >= 305 ){
+		return;
+	}
+
+	aliens_drawObject(tankPos, TANK_Y, tank, BLACK);
+	tankPos++;
+	aliens_drawObject(tankPos, TANK_Y, tank, GREEN);
+
+}
+
+void screenState_moveTankLeft(){
+	if(tankPos <= 0){
+		return;
+	}
+	aliens_drawObject(tankPos, TANK_Y, tank, BLACK);
+	tankPos--;
+	aliens_drawObject(tankPos, TANK_Y, tank, GREEN);
+}
+
+void screenState_killAlien(uint8_t alienToKill){
+	aliens_drawSwarm(screenState_getSwarmX(), screenState_getSwarmY(), screenState_getSwarmArray(), BLACK);
+	screenState_swarmArray[alienToKill] = 0;
+	aliens_drawSwarm(screenState_getSwarmX(), screenState_getSwarmY(), screenState_getSwarmArray(), WHITE);
+
+}
+
+void screenState_alienFire() {
+	uint8_t i;
+	for(i = 1; i < 5; i++) {
+		if(!bullets[i][1]) {
+			bullets[i][0] = (rand() % 11) * 16 + 8;
+			bullets[i][1] = screenState_getSwarmY() + BULLET_OFFSET;
+			drawBullets();
+			return;
+		}
+	}
+}
+
+void screenState_tankFire() {
+	if(!bullets[0][1]) {
+		aliens_drawObject(tankPos + 7, TANK_Y + 5, bullet, WHITE);
+	}
+}
+
+void drawBullets() {
+	uint8_t i;
+	for(i = 1; i < 5; i++) {
+		if(bullets[i][1]) {
+			aliens_drawObject(bullets[i][0], bullets[i][1], bullet, WHITE);
+		}
+	}
+}
+
+
+

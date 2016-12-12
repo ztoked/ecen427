@@ -1,0 +1,18 @@
+Running: C:\Xilinx\13.4\ISE_DS\ISE\bin\nt64\unwrapped\fuse.exe -intstyle ise -incremental -o E:/427/Lab7/nesControllerVHD/test_isim_beh.exe -prj E:/427/Lab7/nesControllerVHD/test_beh.prj work.test 
+ISim O.87xd (signature 0xc3576ebc)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Parsing VHDL file "E:/427/Lab7/nesControllerVHD/nesController.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Compiling package standard
+Compiling package std_logic_1164
+Compiling package numeric_std
+Compiling architecture behavioral of entity test
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+Compiled 4 VHDL Units
+Built simulation executable E:/427/Lab7/nesControllerVHD/test_isim_beh.exe
+Fuse Memory Usage: 36696 KB
+Fuse CPU Usage: 467 ms

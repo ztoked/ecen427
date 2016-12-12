@@ -1,0 +1,10 @@
+##############################################################################
+## Filename:          E:/427/Lab7/HardWare/pcores/nes_controller_v1_00_a/data/nes_controller_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Mon Nov 14 15:36:27 2016 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib proc_common_v3_00_a  all 
+lib axi_lite_ipif_v1_01_a  all 
+lib nes_controller_v1_00_a user_logic vhdl
+lib nes_controller_v1_00_a nes_controller vhdl

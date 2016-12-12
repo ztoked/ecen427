@@ -1,0 +1,14 @@
+#Mon Oct 17 15:46:25 MDT 2016
+com.xilinx.sdk.linkgen.prefs.Sounds\:Heap=MCB_DDR2_S0_AXI_BASEADDR
+com.xilinx.sdk.linkgen.prefs.Sounds\:.sbss=MCB_DDR2_S0_AXI_BASEADDR
+com.xilinx.sdk.linkgen.prefs.Sounds\:.sdata=MCB_DDR2_S0_AXI_BASEADDR
+com.xilinx.sdk.linkgen.prefs.Sounds\:.data=MCB_DDR2_S0_AXI_BASEADDR
+com.xilinx.sdk.linkgen.prefs.Sounds\:.sdata2=MCB_DDR2_S0_AXI_BASEADDR
+com.xilinx.sdk.linkgen.prefs.Sounds\:Stack=MCB_DDR2_S0_AXI_BASEADDR
+com.xilinx.sdk.linkgen.prefs.Sounds\:.rodata=MCB_DDR2_S0_AXI_BASEADDR
+com.xilinx.sdk.linkgen.prefs.Sounds\:.text=MCB_DDR2_S0_AXI_BASEADDR
+eclipse.preferences.version=1
+com.xilinx.sdk.linkgen.prefs.Sounds\:.bss=MCB_DDR2_S0_AXI_BASEADDR
+com.xilinx.sdk.linkgen.prefs.Sounds\:Heap-size=1024
+com.xilinx.sdk.linkgen.prefs.Sounds\:.sbss2=MCB_DDR2_S0_AXI_BASEADDR
+com.xilinx.sdk.linkgen.prefs.Sounds\:Stack-size=4096

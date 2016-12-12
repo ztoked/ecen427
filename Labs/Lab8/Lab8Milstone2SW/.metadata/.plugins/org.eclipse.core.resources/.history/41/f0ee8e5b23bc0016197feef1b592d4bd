@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdint.h>
+#include "dma.h"
+#include "platform.h"
+#include "xparameters.h"
+#include "dmaDriver.h"
+
+#include "xgpio.h"          // Provides access to PB GPIO driver.
+#include "xintc_l.h"        // Provides handy macros for the interrupt controller.
+#include <stdio.h>
+#include "platform.h"
+#include "xparameters.h"
+#include "xaxivdma.h"
+#include "xio.h"
+#include "time.h"
+#include "unistd.h"
+#include "aliens.h"
+#include "screenState.h"
+#include "sounds.h"
+#include "thePITS.h"
+#include <stdlib.h>
+#include <string.h>
+
+
+
+
+
+void print(char *str);
+
+static char readData[] = "abc";
+static char writeData[] = "bla";
+static uint8_t interrupted = 0;
+
+
+void dma_interrupt_handler() {
+	xil_printf("Done\r\n");
+}
+
+void interrupt_handler_dispatcher(void* ptr) {
+	ticks++;
+	int intc_status = XIntc_GetIntrStatus(XPAR_INTC_0_BASEADDR);
+
+	// Check the DMA interrupt
+	if (intc_status & XPAR_DMA_0_IP2BUS_INTERRUPT_MASK) {
+		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_DMA_0_IP2BUS_INTERRUPT_MASK);
+		dma_interrupt_handler();
+	}
+
+}
+
+
+int main()
+{
+
+	microblaze_register_handler(interrupt_handler_dispatcher, NULL);
+	XIntc_EnableIntr(
+			XPAR_INTC_0_BASEADDR,
+			(XPAR_PIT_0_IP2BUS_INTERRUPT_MASK
+						| XPAR_DMA_0_IP2BUS_INTERRUPT_MASK));
+	XIntc_MasterEnable(XPAR_INTC_0_BASEADDR);
+	microblaze_enable_interrupts();
+
+
+
+	uint32_t source_word = 0xDEADBEEF;
+	uint32_t destination_word = 0x0;
+
+    init_platform();
+
+    print("Hello World\n\r");
+    cleanup_platform();
+    printf("Printing value before DMA transfer.\n\r");
+    xil_printf("%x\r\n", writeData);
+
+    DMA_MasterRecvWord(XPAR_DMA_0_BASEADDR, (Xuint32) &source_word);
+    DMA_MasterSendWord(XPAR_DMA_0_BASEADDR, (Xuint32) &destination_word);
+
+
+    while(!interrupted);
+    printf("Printing value after DMA transfer.\n\r");
+    xil_printf("%x\r\n", destination_word);
+
+//    cleanup_platform();
+
+    return 0;
+}

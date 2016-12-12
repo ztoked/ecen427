@@ -1,0 +1,7 @@
+#include <>stdint.h>
+
+void screenState_setFramePointer(unsigned int * framePointer);
+
+unsigned int * screenState_getFramePointer();
+
+void screenState_clearScreen();
